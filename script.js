@@ -6,9 +6,15 @@ console.log(pizzaJson);
 const c = (elemento)=> document.querySelector(elemento);  // Vai retornar o item
 const cs = (elemento)=> document.querySelectorAll(elemento); // Vai retornar um array com os itens
 
-pizzaJson.map((pizza,index)=>{
+pizzaJson.map((pizza,index)=>{ // Para cada objeto dentro de pizzaJson mapeie e adciona a classe ".pizza-item"
     let pizzaItem = c('.models .pizza-item').cloneNode(true); // Clonando a classe e jogando dentro da classe ".pizza-area"
     // preencher as informações em pizza-item
+
+    pizzaItem.querySelector('.pizza-item--img img').src = pizza.img;
+    pizzaItem.querySelector('.pizza-item--price').innerHTML = `RS:${pizza.price.toFixed(2)}`;
+    pizzaItem.querySelector('.pizza-item--name').innerHTML = pizza.name;
+    pizzaItem.querySelector('.pizza-item--desc').innerHTML = pizza.description;
+
 
     c('.pizza-area').append(pizzaItem); // pizza-area recebe a classe clonada
 
