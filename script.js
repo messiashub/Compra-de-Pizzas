@@ -1,12 +1,17 @@
 
 /* 1 MAPEANDO O JASON 'PIZZAS.JS */
 
-console.log(pizzaJson);
+//console.log(pizzaJson);
+
+// 5 -> AÇÕES DO MODAL = 'cancelar',
+
+// 4
+let modalQT = 1 // inicializando com o valor do modal com a quantidade 1
 
 // Macetinho =>  jogando os documents query selector em variáveis
 const c = (elemento)=> document.querySelector(elemento);  // Vai retornar o item
 const cs = (elemento)=> document.querySelectorAll(elemento); // Vai retornar um array com os itens
-
+//////
 
 // 1
 pizzaJson.map((pizza,index)=>{ // Para cada objeto dentro de pizzaJson mapeie e adciona a classe ".pizza-item"
@@ -27,29 +32,33 @@ pizzaJson.map((pizza,index)=>{ // Para cada objeto dentro de pizzaJson mapeie e 
         let chave = e.target.closest('.pizza-item').getAttribute('data-key');
         //console.log(pizzaJson[chave]);
 
-    // 3.2 preenchendo o campo 'img','nome','descrição','price',tamanhos  da pizza 
+       // 4.1 -> chamando a variável
+        modalQT = 1;
+
+    // 3.2 preenchendo o campo 'img','nome','descrição','price','tamanhos'  da pizza 
         c('.pizzaBig img').src = pizzaJson[chave].img;
         c('.pizzaInfo h1').innerHTML = pizzaJson[chave].name;
         c('.pizzaInfo--desc').innerHTML = pizzaJson[chave].description;
         c('.pizzaInfo--actualPrice').innerHTML = pizzaJson[chave].price.toFixed(2);
-        c('.pizzaInfo--size.selected').classList.remove('selected');
+        c('.pizzaInfo--size.selected').classList.remove('selected'); // removendo a classe 'selected'
+        
 
         cs('.pizzaInfo--size').forEach((size,sizeIndex)=>{
+            if(sizeIndex == 2){
+                size.classList.add('selected');
+            }
             size.querySelector('span').innerHTML = pizzaJson[chave].sizes[sizeIndex];
         })
 
-
 // 2 MODAL
+        c('.pizzaInfo--qt').innerHTML = modalQT;  // 4.2 -> sempre que abrir o modal vai inicializar com a quantidade 1
         c('.pizzaWindowArea').style.opacity = 0;
         c('.pizzaWindowArea').style.display ='flex';
 
        setTimeout(()=>{
            c('.pizzaWindowArea').style.opacity =1
        },200)
-        
-
     })
-
 
     c('.pizza-area').append(pizzaItem); // pizza-area recebe a classe clonada
 
