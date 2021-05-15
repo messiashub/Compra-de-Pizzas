@@ -13,8 +13,6 @@ pizzaJson.map((pizza,index)=>{ // Para cada objeto dentro de pizzaJson mapeie e 
     let pizzaItem = c('.models .pizza-item').cloneNode(true); // Clonando a classe e jogando dentro da classe ".pizza-area"
     // preencher as informações em pizza-item
 
-    
-
     pizzaItem.querySelector('.pizza-item--img img').src = pizza.img;
     pizzaItem.querySelector('.pizza-item--price').innerHTML = `RS:${pizza.price.toFixed(2)}`;
     pizzaItem.querySelector('.pizza-item--name').innerHTML = pizza.name;
@@ -22,18 +20,23 @@ pizzaJson.map((pizza,index)=>{ // Para cada objeto dentro de pizzaJson mapeie e 
     pizzaItem.querySelector('a').addEventListener('click',(e)=>{
         e.preventDefault();
 
-    // 3 setando o index das pizzas
+// 3 setando o index das pizzas
     pizzaItem.setAttribute('data-key',index);    
 
     // 3.1 pegando o index das pizzas    
         let chave = e.target.closest('.pizza-item').getAttribute('data-key');
         //console.log(pizzaJson[chave]);
 
-    // 3.2 preenchendo o campo 'img','nome','descrição'  da pizza 
+    // 3.2 preenchendo o campo 'img','nome','descrição','price',tamanhos  da pizza 
         c('.pizzaBig img').src = pizzaJson[chave].img;
         c('.pizzaInfo h1').innerHTML = pizzaJson[chave].name;
         c('.pizzaInfo--desc').innerHTML = pizzaJson[chave].description;
+        c('.pizzaInfo--actualPrice').innerHTML = pizzaJson[chave].price.toFixed(2);
+        c('.pizzaInfo--size.selected').classList.remove('selected');
 
+        cs('.pizzaInfo--size').forEach((size,sizeIndex)=>{
+            size.querySelector('span').innerHTML = pizzaJson[chave].sizes[sizeIndex];
+        })
 
 
 // 2 MODAL
