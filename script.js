@@ -63,3 +63,16 @@ pizzaJson.map((pizza,index)=>{ // Para cada objeto dentro de pizzaJson mapeie e 
     c('.pizza-area').append(pizzaItem); // pizza-area recebe a classe clonada
 
 });
+
+// 5 -> Eventos do Modal
+// 5.1  função para  fechar o modal
+function fecharModal(){
+    c('.pizzaWindowArea').style.opacity = 0;
+    setTimeout(()=>{
+         c('.pizzaWindowArea').style.display = 'none';
+    }, 500);
+};
+// 5.2  Selecionando os  botões ou elementos que vai receber a  função 'fecharModal()'
+cs('.pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton').forEach((item)=>{
+    item.addEventListener('click', fecharModal);
+});
