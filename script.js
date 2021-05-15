@@ -65,6 +65,7 @@ pizzaJson.map((pizza,index)=>{ // Para cada objeto dentro de pizzaJson mapeie e 
 });
 
 // 5 -> Eventos do Modal
+
 // 5.1  função para  fechar o modal
 function fecharModal(){
     c('.pizzaWindowArea').style.opacity = 0;
@@ -72,7 +73,34 @@ function fecharModal(){
          c('.pizzaWindowArea').style.display = 'none';
     }, 500);
 };
-// 5.2  Selecionando os  botões ou elementos que vai receber a  função 'fecharModal()'
+// 5.1  Selecionando os  botões ou elementos que vai receber a  função 'fecharModal()'
 cs('.pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton').forEach((item)=>{
     item.addEventListener('click', fecharModal);
 });
+
+// 5.2  Função  para os botões + e - do Modal
+
+c('.pizzaInfo--qtmais').addEventListener('click',()=>{
+    modalQT++;   // modal recebe mais 1
+    c('.pizzaInfo--qt').innerHTML = modalQT; // modal atualizado
+
+
+});
+
+c('.pizzaInfo--qtmenos').addEventListener('click',()=>{
+
+    if(modalQT > 1){
+        modalQT--;
+        c('.pizzaInfo--qt').innerHTML = modalQT;
+    };
+   
+});
+
+// 5.3 Função para selecionar os tamanhos das pizzas
+cs('.pizzaInfo--size').forEach((size,sizeIndex)=>{
+    size.addEventListener('click',(e)=>{
+        c('.pizzaInfo--size.selected').classList.remove('selected');
+        size.classList.add('selected')
+    })
+    
+})
