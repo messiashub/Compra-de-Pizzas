@@ -8,6 +8,10 @@
 // 4
 let modalQT = 1 // inicializando com o valor do modal com a quantidade 1
 
+// 5.4
+let carrinho=[];
+let modalChave = 0;
+
 // Macetinho =>  jogando os documents query selector em variáveis
 const c = (elemento)=> document.querySelector(elemento);  // Vai retornar o item
 const cs = (elemento)=> document.querySelectorAll(elemento); // Vai retornar um array com os itens
@@ -33,7 +37,8 @@ pizzaJson.map((pizza,index)=>{ // Para cada objeto dentro de pizzaJson mapeie e 
         //console.log(pizzaJson[chave]);
 
        // 4.1 -> chamando a variável
-        modalQT = 1;
+        modalQT = 1; // <- Inicia com a quantidade 1
+        modalChave = chave; // 5.4
 
     // 3.2 preenchendo o campo 'img','nome','descrição','price','tamanhos'  da pizza 
         c('.pizzaBig img').src = pizzaJson[chave].img;
@@ -104,3 +109,25 @@ cs('.pizzaInfo--size').forEach((size,sizeIndex)=>{
     })
     
 })
+
+// 5.4 Adicionar ao carrinho de compras
+c('.pizzaInfo--addButton').addEventListener('click',()=>{
+    // Qual a  pizza?
+    console.log(`Pizza ${modalChave}`)
+    // Qual tamanho selecionado?
+    let tamanho= parseInt(c('.pizzaInfo--size.selected').getAttribute('data-key'));
+    console.log(`Tamanho: ${tamanho}`);
+    // Quantas pizzas?
+    console.log(`Quantidade de Pizzas ${modalQT}`);
+
+    carrinho.push({
+        id:pizzaJson[modalChave].id,
+        tamanho,
+        quantidade:modalQT,
+    });
+    fecharModal();
+
+
+
+});
+console.log(carrinho);
