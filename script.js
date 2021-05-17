@@ -34,7 +34,8 @@ pizzaJson.map((pizza,index)=>{ // Para cada objeto dentro de pizzaJson mapeie e 
 
     // 3.1 pegando o index das pizzas    
         let chave = e.target.closest('.pizza-item').getAttribute('data-key');
-        //console.log(pizzaJson[chave]);
+        console.log(pizzaJson[chave]);
+        console.log(chave);
 
        // 4.1 -> chamando a variável
         modalQT = 1; // <- Inicia com a quantidade 1
@@ -115,16 +116,28 @@ c('.pizzaInfo--addButton').addEventListener('click',()=>{
     // Qual a  pizza?
     console.log(`Pizza ${modalChave}`)
     // Qual tamanho selecionado?
-    let tamanho= parseInt(c('.pizzaInfo--size.selected').getAttribute('data-key'));
+    let tamanho = parseInt(c('.pizzaInfo--size.selected').getAttribute('data-key'));
     console.log(`Tamanho: ${tamanho}`);
     // Quantas pizzas?
     console.log(`Quantidade de Pizzas ${modalQT}`);
 
-    carrinho.push({
+    // 6 Identificando e contando pedidos iguais 
+    let identificador = pizzaJson[modalChave].id+"#"+tamanho;
+    let jaTem = carrinho.findIndex((item)=>item.identificador == identificador);
+
+    if(jaTem >- 1){
+        carrinho[jaTem].quantidade +=modalQT;
+
+    }else{
+        carrinho.push({
+        identificador,
         id:pizzaJson[modalChave].id,
         tamanho,
         quantidade:modalQT,
     });
+    }
+
+    
     fecharModal();
 
 
