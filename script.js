@@ -137,10 +137,25 @@ c('.pizzaInfo--addButton').addEventListener('click',()=>{
     });
     }
 
-    
+    updateCarrinho() // 7.1 <-chamando a função de mostrar o carrinho atualizado
     fecharModal();
 
-
-
 });
+
+// 7 =>  FUNÇÃO PARA MOSTRAR O CARRINHO
+function updateCarrinho(){
+    if(carrinho.length > 0){
+        // mostre o carrinho
+        c('aside').classList.add('show');
+        for(let i in carrinho){ // < Para cada item no carrinho
+            let pizzaItem = pizzaJson.find((item)=>item.id == carrinho[i].id);
+            console.log(pizzaItem);
+
+        } 
+    }else{
+        // esconda o carrinho
+        c('aside').classList.remove('show');
+    }
+
+}
 console.log(carrinho);
