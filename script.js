@@ -147,9 +147,35 @@ function updateCarrinho(){
     if(carrinho.length > 0){
         // mostre o carrinho
         c('aside').classList.add('show');
+        c('.cart').innerHTML =''; //8.1
         for(let i in carrinho){ // < Para cada item no carrinho
             let pizzaItem = pizzaJson.find((item)=>item.id == carrinho[i].id);
-            console.log(pizzaItem);
+            //console.log(pizzaItem);
+// 8 => PREENCHENDO OS ITENS NO CARRINHO
+
+            // 8.1 Fazendo  switch para indentificar os tamanhos com letras
+            let pizzaTamanho; 
+            switch(carrinho[i].tamanho){
+                case 0:
+                    pizzaTamanho = 'P';
+                    break;
+                case 1:
+                    pizzaTamanho = 'M';
+                    break;
+                case 2:
+                    pizzaTamanho = 'G';
+                    break;
+
+            }
+            let pizzaNome = `${pizzaItem.name} (${pizzaTamanho})`;
+
+            let carrinhoItem = c('.models .cart--item').cloneNode(true);
+            carrinhoItem.querySelector('img').src=pizzaItem.img; // imagem
+            carrinhoItem.querySelector('.cart--item-nome').innerHTML = pizzaNome;
+            carrinhoItem.querySelector('.cart--item--qt').innerHTML =carrinho[i].quantidade;
+
+
+            c('.cart').append(carrinhoItem);
 
         } 
     }else{
