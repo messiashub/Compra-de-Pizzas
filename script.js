@@ -148,9 +148,16 @@ function updateCarrinho(){
         // mostre o carrinho
         c('aside').classList.add('show');
         c('.cart').innerHTML =''; //8.1
+
+// 9.1 => criando as variáveis para "subtotal","desconto" e "total"
+        let subtotal = 0;
+        let desconto = 0;
+        let total = 0;
+
         for(let i in carrinho){ // < Para cada item no carrinho
             let pizzaItem = pizzaJson.find((item)=>item.id == carrinho[i].id);
             //console.log(pizzaItem);
+            subtotal += pizzaItem.price * carrinho[i].quantidade;  // <= 9.2
 // 8 => PREENCHENDO OS ITENS NO CARRINHO
 
             // 8.1 Fazendo  switch para indentificar os tamanhos com letras
@@ -173,11 +180,33 @@ function updateCarrinho(){
             carrinhoItem.querySelector('img').src=pizzaItem.img; // imagem
             carrinhoItem.querySelector('.cart--item-nome').innerHTML = pizzaNome;
             carrinhoItem.querySelector('.cart--item--qt').innerHTML =carrinho[i].quantidade;
+// 9 => BOTÕES + E -  DO CARRINHO
+            carrinhoItem.querySelector('.cart--item-qtmenos').addEventListener('click',()=>{
+                if(carrinho[i].quantidade > 1){
+                    carrinho[i].quantidade--;
+                }else{
+                    carrinho.splice(i,1);
+                }
+                updateCarrinho();
 
+            })
+            carrinhoItem.querySelector('.cart--item-qtmais').addEventListener('click',()=>{
+                carrinho[i].quantidade++;
+                updateCarrinho();
+
+            })
 
             c('.cart').append(carrinhoItem);
 
         } 
+
+        desconto = subtotal * 0.1;
+        total = subtotal - desconto;
+
+        c('.subtotal span:last-child').innerHTML =`${subtotal.toFixed(2)}`;
+        c('.desconto span:last-child').innerHTML =`${desconto.toFixed(2)}`;
+        c('.total span:last-child').innerHTML =`${total.toFixed(2)}`;
+
     }else{
         // esconda o carrinho
         c('aside').classList.remove('show');
