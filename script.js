@@ -141,9 +141,24 @@ c('.pizzaInfo--addButton').addEventListener('click',()=>{
     fecharModal();
 
 });
+// 10.1  FUNÇÃO PARA MOSTRAR O CARRINHO NO CELULAR
+
+    c('.menu-openner').addEventListener('click',()=>{
+    if(carrinho.length > 0){
+        c('aside').style.left = '0';
+    }
+    });
+
+    c('.menu-closer').addEventListener('click',()=>{
+        c('aside').style.left ='100vw';
+    })
 
 // 7 =>  FUNÇÃO PARA MOSTRAR O CARRINHO
 function updateCarrinho(){
+    
+
+    c('.menu-openner span').innerHTML = carrinho.length; // 10  Celular
+
     if(carrinho.length > 0){
         // mostre o carrinho
         c('aside').classList.add('show');
@@ -210,6 +225,7 @@ function updateCarrinho(){
     }else{
         // esconda o carrinho
         c('aside').classList.remove('show');
+        c('aside').style.left ='100vw'; // 10.2
     }
 
 }
